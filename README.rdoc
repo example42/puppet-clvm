@@ -1,6 +1,8 @@
 = Puppet module: clvm
 
-This is a Puppet module for clvm based on the second generation layout ("NextGen") of Example42 Puppet Modules.
+This is a Puppet module for clvmd based on the second generation layout ("NextGen") of Example42 Puppet Modules.
+
+This module requires example42 rhcs module
 
 Made by Alessandro Franceschi / Lab42
 
