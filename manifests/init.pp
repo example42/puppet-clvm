@@ -347,7 +347,7 @@ class clvm (
     enable     => $clvm::manage_service_enable,
     hasstatus  => $clvm::service_status,
     pattern    => $clvm::process,
-    require    => [ Package[$clvm::package],Service['cman'],
+    require    => [ Package[$clvm::package] , Service['cman'] ],
     before     => Service['rgmanager'],
     noop       => $clvm::bool_noops,
   }
