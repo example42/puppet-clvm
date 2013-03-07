@@ -1,4 +1,4 @@
-= Puppet module: clvm
+# Puppet module: clvm
 
 This is a Puppet module for clvmd based on the second generation layout ("NextGen") of Example42 Puppet Modules.
 
@@ -17,7 +17,7 @@ This module requires functions provided by the Example42 Puppi module (you need 
 For detailed info about the logic and usage patterns of Example42 modules check the DOCS directory on Example42 main modules set.
 
 
-== USAGE - Basic management
+## USAGE - Basic management
 
 * Install clvm with default settings
 
@@ -54,7 +54,7 @@ For detailed info about the logic and usage patterns of Example42 modules check 
         }
 
 
-== USAGE - Overrides and Customizations
+## USAGE - Overrides and Customizations
 * Use custom sources for main config file 
 
         class { 'clvm':
@@ -82,7 +82,7 @@ For detailed info about the logic and usage patterns of Example42 modules check 
         }
 
 
-== USAGE - Example42 extensions management 
+## USAGE - Example42 extensions management 
 * Activate puppi (recommended, but disabled by default)
 
         class { 'clvm':
@@ -113,6 +113,6 @@ For detailed info about the logic and usage patterns of Example42 modules check 
         }
 
 
-== CONTINUOUS TESTING
+## CONTINUOUS TESTING
 
 Travis {<img src="https://travis-ci.org/example42/puppet-clvm.png?branch=master" alt="Build Status" />}[https://travis-ci.org/example42/puppet-clvm]
