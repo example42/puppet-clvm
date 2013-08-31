@@ -128,7 +128,7 @@
 # [*noops*]
 #   Set noop metaparameter to true for all the resources managed by the module.
 #   Basically you can run a dryrun for this specific module if you set
-#   this to true. Default: false
+#   this to true. Default: undef
 #
 # Default class params - As defined in clvm::params.
 # Note that these variables are mostly defined and used in the module itself,
@@ -263,7 +263,6 @@ class clvm (
   $bool_firewall=any2bool($firewall)
   $bool_debug=any2bool($debug)
   $bool_audit_only=any2bool($audit_only)
-  $bool_noops=any2bool($noops)
 
   ### Definition of some variables used in the module
   $manage_package = $clvm::bool_absent ? {
@@ -338,7 +337,7 @@ class clvm (
   ### Managed resources
   package { $clvm::package:
     ensure  => $clvm::manage_package,
-    noop    => $clvm::bool_noops,
+    noop    => $clvm::noops,
   }
 
   service { 'clvm':
@@ -349,7 +348,7 @@ class clvm (
     pattern    => $clvm::process,
     require    => [ Package[$clvm::package] , Service['cman'] ],
     before     => Service['rgmanager'],
-    noop       => $clvm::bool_noops,
+    noop       => $clvm::noops,
   }
 
   file { 'clvm.conf':
@@ -364,7 +363,7 @@ class clvm (
     content => $clvm::manage_file_content,
     replace => $clvm::manage_file_replace,
     audit   => $clvm::manage_audit,
-    noop    => $clvm::bool_noops,
+    noop    => $clvm::noops,
   }
 
   # The whole clvm configuration directory can be recursively overriden
@@ -380,7 +379,7 @@ class clvm (
       force   => $clvm::bool_source_dir_purge,
       replace => $clvm::manage_file_replace,
       audit   => $clvm::manage_audit,
-      noop    => $clvm::bool_noops,
+      noop    => $clvm::noops,
     }
   }
 
@@ -398,7 +397,7 @@ class clvm (
       ensure    => $clvm::manage_file,
       variables => $classvars,
       helper    => $clvm::puppi_helper,
-      noop      => $clvm::bool_noops,
+      noop      => $clvm::noops,
     }
   }
 
@@ -412,7 +411,7 @@ class clvm (
         target   => $clvm::monitor_target,
         tool     => $clvm::monitor_tool,
         enable   => $clvm::manage_monitor,
-        noop     => $clvm::bool_noops,
+        noop     => $clvm::noops,
       }
     }
     if $clvm::service != '' {
@@ -424,7 +423,7 @@ class clvm (
         argument => $clvm::process_args,
         tool     => $clvm::monitor_tool,
         enable   => $clvm::manage_monitor,
-        noop     => $clvm::bool_noops,
+        noop     => $clvm::noops,
       }
     }
   }
@@ -441,7 +440,7 @@ class clvm (
       direction   => 'input',
       tool        => $clvm::firewall_tool,
       enable      => $clvm::manage_firewall,
-      noop        => $clvm::bool_noops,
+      noop        => $clvm::noops,
     }
   }
 
@@ -455,7 +454,7 @@ class clvm (
       owner   => 'root',
       group   => 'root',
       content => inline_template('<%= scope.to_hash.reject { |k,v| k.to_s =~ /(uptime.*|path|timestamp|free|.*password.*|.*psk.*|.*key)/ }.to_yaml %>'),
-      noop    => $clvm::bool_noops,
+      noop    => $clvm::noops,
     }
   }
 
